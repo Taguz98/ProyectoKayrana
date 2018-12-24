@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="ProyectoKayranaPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>ClasesDB.Estudiante</class>
+    <class>ClasesDB.Horas</class>
+    <class>ClasesDB.CarreraJornadas</class>
+    <class>ClasesDB.MateriasCarrera</class>
+    <class>ClasesDB.Tareas</class>
+    <class>ClasesDB.Docente</class>
+    <class>ClasesDB.Jornada</class>
+    <class>ClasesDB.ParalelosEstudiantes</class>
+    <class>ClasesDB.JornadaDocente</class>
+    <class>ClasesDB.DocentesInstituto</class>
+    <class>ClasesDB.DocenteCarrera</class>
+    <class>ClasesDB.ParalelosJornada</class>
+    <class>ClasesDB.Recordatorios</class>
+    <class>ClasesDB.PreguntasSeguridad</class>
+    <class>ClasesDB.PeriodoLectivo</class>
+    <class>ClasesDB.MateriasCiclo</class>
+    <class>ClasesDB.MateriasPreferentes</class>
+    <class>ClasesDB.Usuario</class>
+    <class>ClasesDB.Clases</class>
+    <class>ClasesDB.DetalleJornada</class>
+    <class>ClasesDB.Docencia</class>
+    <class>ClasesDB.ClasesParalelo</class>
+    <class>ClasesDB.ApuntesnoDocencia</class>
+    <class>ClasesDB.ActividadesDocente</class>
+    <class>ClasesDB.Actividades</class>
+    <class>ClasesDB.Materias</class>
+    <class>ClasesDB.Apuntes</class>
+    <class>ClasesDB.Distributivo</class>
+    <class>ClasesDB.NoDocencia</class>
+    <class>ClasesDB.Clasesdia</class>
+    <class>ClasesDB.ApuntesDocencia</class>
+    <class>ClasesDB.Carrera</class>
+    <class>ClasesDB.TipoUsuario</class>
+    <class>ClasesDB.Paralelos</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5433/ProyectoKayrana"/>
+      <property name="javax.persistence.jdbc.user" value="postgres"/>
+      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="Holapostgres"/>
+    </properties>
+  </persistence-unit>
+</persistence>
