@@ -18,6 +18,11 @@ public class Distributivo extends javax.swing.JFrame {
     /**
      * Creates new form Distributivo
      */
+    
+    //Variables para mover la ventana  
+    int mouseX; 
+    int mouseY; 
+    
     public Distributivo() {
         initComponents();
     }
@@ -80,6 +85,16 @@ public class Distributivo extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlHeader.setBackground(new java.awt.Color(102, 102, 102));
+        pnlHeader.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                pnlHeaderMouseDragged(evt);
+            }
+        });
+        pnlHeader.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pnlHeaderMousePressed(evt);
+            }
+        });
         pnlHeader.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -95,12 +110,12 @@ public class Distributivo extends javax.swing.JFrame {
 
         cbPeriodoLectivo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cbPeriodoLectivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        pnlHeader.add(cbPeriodoLectivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 320, 30));
+        pnlHeader.add(cbPeriodoLectivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 380, 30));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Eliga el periodo lectivo");
-        pnlHeader.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 170, 30));
+        pnlHeader.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 170, 30));
 
         getContentPane().add(pnlHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 50));
 
@@ -132,6 +147,18 @@ public class Distributivo extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void pnlHeaderMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlHeaderMousePressed
+        mouseX = evt.getX();
+        mouseY = evt.getY(); 
+    }//GEN-LAST:event_pnlHeaderMousePressed
+
+    private void pnlHeaderMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlHeaderMouseDragged
+        int x = evt.getXOnScreen(); 
+        int y = evt.getYOnScreen(); 
+        
+        this.setLocation(x - mouseX, y - mouseY); 
+    }//GEN-LAST:event_pnlHeaderMouseDragged
 
     /**
      * @param args the command line arguments
