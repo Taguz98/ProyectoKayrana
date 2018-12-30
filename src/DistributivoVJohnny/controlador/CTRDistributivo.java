@@ -353,9 +353,11 @@ public class CTRDistributivo {
             pnlClas.getTblParalelosCiclo().setModel(mdTblParalelos);
 
             for (Paralelos pl : paralelos) {
-                if (pl.getCiclo() == ciclo) {
-                    Object valores[] = {pl.getNombre()};
-                    mdTblParalelos.addRow(valores);
+                for (Jornadas jd : pl.getJornadas()) {
+                    if (pl.getCiclo() == ciclo) {
+                        Object valores[] = {pl.getNombre()};
+                        mdTblParalelos.addRow(valores);
+                    }
                 }
             }
         }
@@ -409,7 +411,9 @@ public class CTRDistributivo {
         //Aqui guardaremos la informacion del paralelo 
         int horaInicio = 0;
         int horaFin = 0;
-        int HORAS = 0;
+        int horaImpri = 0;
+        //Vector en el que se almacenara todas las horas de nuestro sistema  
+        int HORAS[] = {7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
 
         if (posParFil > 0) {
             System.out.println("Nombre de curso: " + paralelosFiltrados.get(posParFil - 1).getNombre());
@@ -425,28 +429,24 @@ public class CTRDistributivo {
                     horaFin = jd.getHoraFin();
                 }
             }
-            
+
             //Pasamos el modelo con la matriz de su horario 
             String campos[][] = new String[horaFin - horaInicio][6];
             DefaultTableModel mdTblHorarioDatos = new DefaultTableModel(campos, titulo);
             pnlClas.getTblHorario().setModel(mdTblHorarioDatos);
             //Ampliamos las celdas  
-            pnlClas.getTblHorario().setRowHeight(30); 
-            
-            if (horaInicio == 1) {
-                HORAS = 7;
-            } else if (horaInicio == 8) {
-                HORAS = 14;
-            }
-            System.out.println("Cantidad: " + (horaFin - (horaInicio - 1)));
+            pnlClas.getTblHorario().setRowHeight(30);
+
+            horaImpri = HORAS[horaInicio - 1];
+
             String horas[] = new String[horaFin - horaInicio];
             for (int i = 0; i < (horaFin - horaInicio); i++) {
-                if (HORAS < 10) {
-                    horas[i] = "0" + HORAS + ":00";
+                if (horaImpri < 10) {
+                    horas[i] = "0" + horaImpri + ":00";
                 } else {
-                    horas[i] = HORAS + ":00";
+                    horas[i] = horaImpri + ":00";
                 }
-                HORAS++;
+                horaImpri++;
             }
 
             for (int i = 0; i < horas.length; i++) {
@@ -454,6 +454,20 @@ public class CTRDistributivo {
                 //mdTblHorarioDatos.addColumn(horas); 
                 mdTblHorarioDatos.setValueAt(horas[i], i, 0);
             }
+
+            int horasClase = (horaFin - horaInicio) * 5;
+            pnlClas.getLblHorasClase().setText(horasClase + "");
+
+            int numMat = 0;
+            int ciclo = pnlClas.getCbCiclo().getSelectedIndex();
+
+            for (Materias mt : materias) {
+                if (mt.getCiclo() == ciclo) {
+                    numMat++;
+                }
+            }
+
+            pnlClas.getLblNumMaterias().setText(numMat + "");
 
         }
 
