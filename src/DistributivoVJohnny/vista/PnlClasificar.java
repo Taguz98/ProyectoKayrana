@@ -125,7 +125,7 @@ public class PnlClasificar extends javax.swing.JPanel {
         });
         jScrollPane4.setViewportView(tblHorario);
 
-        add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 660, 210));
+        add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 660, 209));
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 700, 10));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N

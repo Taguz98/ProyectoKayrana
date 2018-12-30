@@ -5,6 +5,8 @@
  */
 package DistributivoVJohnny.modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Usuario
@@ -14,6 +16,7 @@ public class Paralelos {
     private int id; 
     private String nombre; 
     private int ciclo; 
+    private ArrayList<Jornadas> jornadas; 
     
     public Paralelos(){ 
         
@@ -43,5 +46,11 @@ public class Paralelos {
         this.ciclo = ciclo;
     }
 
-    
+    public ArrayList<Jornadas> getJornadas() {
+        return jornadas;
+    }
+
+    public void setJornadas(ArrayList<Jornadas> jornadas) {
+        this.jornadas = jornadas;
+    }
 }

@@ -10,8 +10,11 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
 /**
@@ -41,8 +44,25 @@ public class Similitudes {
         tituloTbls.setForeground(new Color(255, 255, 255));
         tituloTbls.setOpaque(false);
         tituloTbls.setFont(new Font("Verdana", Font.BOLD, 12));
+        //Para que no se pueda reordenar la tabla 
         tituloTbls.setReorderingAllowed(false);
+        //Para que no se pueda cambiar el tamaño de las columnas
+        tituloTbls.setResizingAllowed(false);
+        /*
+        //Para centrar el titulo 
+        //TableCellRenderer render = tituloTbls.getDefaultRenderer(); 
+        DefaultTableCellRenderer render = new DefaultTableCellRenderer(); 
+        render.setHorizontalAlignment(SwingConstants.RIGHT); 
+        //Primero preguntos cuantas columnas tiene mi tabla y luego las centro
+        System.out.println("Este es el nombre de la tbl: "+tbl.getUIClassID());
+        System.out.println("Esre es el numero de columnas: "+tbl.getColumnCount());
+        for (int i = 0; i < tbl.getColumnCount(); i++) {
+            tbl.getColumnModel().getColumn(i).setCellRenderer(render); 
+        }*/
+        
     }
+    
+    
 
     public static boolean btnsModoInactivo(JButton btnEditar, JButton btnEliminar) {
         //Cambiamos los botones a inactivos
