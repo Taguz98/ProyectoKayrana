@@ -5,16 +5,16 @@
  */
 package DistributivoVJohnny.controlador;
 
-import DistributivoVJohnny.modelo.DBMateriasCarrera;
-import DistributivoVJohnny.modelo.DBMateriasDocente;
-import DistributivoVJohnny.modelo.DBParalelosCarrera;
-import DistributivoVJohnny.modelo.DBParalelosJornada;
-import DistributivoVJohnny.modelo.DBPeriodoLectivoCarrera;
-import DistributivoVJohnny.modelo.MateriasCarrera;
-import DistributivoVJohnny.modelo.MateriasDocente;
-import DistributivoVJohnny.modelo.ParalelosCarrera;
-import DistributivoVJohnny.modelo.ParalelosJornada;
-import DistributivoVJohnny.modelo.PeriodoLectivoCarrera;
+import DistributivoVJohnny.modelo.DBMaterias;
+import DistributivoVJohnny.modelo.DBDocentes;
+import DistributivoVJohnny.modelo.DBParalelos;
+import DistributivoVJohnny.modelo.DBJornadas;
+import DistributivoVJohnny.modelo.DBPeriodoLectivos;
+import DistributivoVJohnny.modelo.Materias;
+import DistributivoVJohnny.modelo.Docentes;
+import DistributivoVJohnny.modelo.Paralelos;
+import DistributivoVJohnny.modelo.Jornadas;
+import DistributivoVJohnny.modelo.PeriodoLectivos;
 import DistributivoVJohnny.vista.Distributivo;
 import DistributivoVJohnny.vista.PnlClasificar;
 import DistributivoVJohnny.vista.PnlDocentes;
@@ -98,7 +98,7 @@ public class CTRDistributivo {
         System.exit(0);
     }
     //Aqui se guardarn todos los periodos lectivos 
-    ArrayList<PeriodoLectivoCarrera> periodos;
+    ArrayList<PeriodoLectivos> periodos;
 
     //Con este metodo llenare mi combo de periodos lectivo  
     public void cargarCbPeriodoLectivo() {
@@ -106,7 +106,7 @@ public class CTRDistributivo {
 
         distri.getCbPeriodoLectivo().addItem(" ");
 
-        DBPeriodoLectivoCarrera per = new DBPeriodoLectivoCarrera();
+        DBPeriodoLectivos per = new DBPeriodoLectivos();
 
         periodos = per.cargarPeriodoLectivoCarrera();
 
@@ -147,7 +147,7 @@ public class CTRDistributivo {
     }
 
     //Aqui guardaremos todos los paralelos 
-    ArrayList<ParalelosCarrera> paralelos;
+    ArrayList<Paralelos> paralelos;
 
     //Llenaremos la tabla de paralelos 
     private void actParalelos() {
@@ -160,7 +160,7 @@ public class CTRDistributivo {
 
         pnlPara.getTblParalelos().setModel(mdParalelos);
 
-        DBParalelosCarrera par = new DBParalelosCarrera();
+        DBParalelos par = new DBParalelos();
 
         //Consultamos todos los paralelos de una carrera  
         paralelos = par.cargarParalelosCarrera(periodos.get(pos - 1).getIdCarrera());
@@ -192,9 +192,9 @@ public class CTRDistributivo {
             
             //System.out.println("Este es el id "+paralelos.get(posPar - 1).getId());
 
-            DBParalelosJornada prJd = new DBParalelosJornada();
+            DBJornadas prJd = new DBJornadas();
             //Aqui guardamos todos los parlJornada 
-            ArrayList<ParalelosJornada> parlJornada = prJd.cargaParalelosJornada(paralelos.get(posPar - 1).getId());
+            ArrayList<Jornadas> parlJornada = prJd.cargaParalelosJornada(paralelos.get(posPar - 1).getId());
 
             String titulo[] = {"Jornadas"};
             String datos[][] = {};
@@ -213,7 +213,7 @@ public class CTRDistributivo {
 
     }
     
-    ArrayList<MateriasCarrera> materias;
+    ArrayList<Materias> materias;
     
     //Llenamos la tabla de materias 
     private void actMaterias(){ 
@@ -224,7 +224,7 @@ public class CTRDistributivo {
         
         pnlMat.getTblMaterias().setModel(mdTblMaterias); 
         
-        DBMateriasCarrera mtCarrera = new DBMateriasCarrera(); 
+        DBMaterias mtCarrera = new DBMaterias(); 
         
         materias = mtCarrera.consultarMateriasCarrera(periodos.get(pos - 1).getIdCarrera()); 
         
@@ -261,9 +261,9 @@ public class CTRDistributivo {
             pnlMat.getTblDocentes().setModel(mdTblDocentes); 
             
             //Consultamos todos los docentes que tengas preferente esta materia  
-            DBMateriasDocente dbMat = new DBMateriasDocente(); 
+            DBDocentes dbMat = new DBDocentes(); 
             
-            ArrayList<MateriasDocente> materiasDocen = dbMat.consultarMateriasDocente(materias.get(posMat - 1).getId()); 
+            ArrayList<Docentes> materiasDocen = dbMat.consultarMateriasDocente(materias.get(posMat - 1).getId()); 
             
             for (int i = 0; i < materiasDocen.size(); i++) {
                 Object valores [] = {materiasDocen.get(i).getCedula(), 
@@ -274,7 +274,7 @@ public class CTRDistributivo {
         }
     }
     
-    ArrayList<MateriasDocente> docentes;
+    ArrayList<Docentes> docentes;
     
     //Para actulizar el pnl docentes 
     public void actDocentes(){ 
@@ -287,7 +287,7 @@ public class CTRDistributivo {
         pnlDocen.getTblDocentes().setModel(mdTblDocentes); 
         
         //Consultamos los docentes de esta carrera  
-        DBMateriasDocente mtDocen = new DBMateriasDocente(); 
+        DBDocentes mtDocen = new DBDocentes(); 
         docentes = mtDocen.consultarDocenteCarrera(periodos.get(pos - 1).getIdCarrera()); 
         
         //Preparamos el combo box docentes para llenarlo  
@@ -318,8 +318,8 @@ public class CTRDistributivo {
             
             pnlDocen.getTblMaterias().setModel(mdTblMaterias); 
             
-            DBMateriasCarrera bdMat = new DBMateriasCarrera(); 
-            ArrayList<MateriasCarrera> mate = bdMat.consultarMateriasDocente(periodos.get(pos - 1).getIdCarrera(), 
+            DBMaterias bdMat = new DBMaterias(); 
+            ArrayList<Materias> mate = bdMat.consultarMateriasDocente(periodos.get(pos - 1).getIdCarrera(), 
                     docentes.get(posDocen - 1).getCedula());  
             
             for (int i = 0; i < mate.size(); i++) {

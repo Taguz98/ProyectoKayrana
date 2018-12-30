@@ -13,18 +13,18 @@ import java.util.ArrayList;
  *
  * @author Usuario
  */
-public class DBParalelosCarrera extends ParalelosCarrera {
+public class DBParalelos extends Paralelos {
 
-    public DBParalelosCarrera() {
+    public DBParalelos() {
 
     }
 
     //Nos conectamos a la base de datos 
     BDConect bd = new BDConect();
 
-    public ArrayList<ParalelosCarrera> cargarParalelosCarrera(int idParalelo) {
+    public ArrayList<Paralelos> cargarParalelosCarrera(int idParalelo) {
         //Aqui guardaremos todos los paralelos que encontremos de una carrera
-        ArrayList<ParalelosCarrera> paralelos = new ArrayList();
+        ArrayList<Paralelos> paralelos = new ArrayList();
 
         try {
             String sql = "SELECT id_paralelo, nombre_paralelo, ciclo_paralelo \n"
@@ -34,7 +34,7 @@ public class DBParalelosCarrera extends ParalelosCarrera {
             ResultSet rs = bd.sql(sql); 
             
             while (rs.next()) {
-                ParalelosCarrera par = new ParalelosCarrera(); 
+                Paralelos par = new Paralelos(); 
                 
                 par.setCiclo(rs.getInt("ciclo_paralelo")); 
                 par.setId(rs.getInt("id_paralelo")); 

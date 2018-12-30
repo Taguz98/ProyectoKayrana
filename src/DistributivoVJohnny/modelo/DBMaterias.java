@@ -13,12 +13,12 @@ import java.util.ArrayList;
  *
  * @author Usuario
  */
-public class DBMateriasCarrera extends MateriasCarrera {
+public class DBMaterias extends Materias {
 
     BDConect bd = new BDConect();
 
-    public ArrayList<MateriasCarrera> consultarMateriasCarrera(int carrera) {
-        ArrayList<MateriasCarrera> materias = new ArrayList();
+    public ArrayList<Materias> consultarMateriasCarrera(int carrera) {
+        ArrayList<Materias> materias = new ArrayList();
 
         try {
             String sql = "SELECT nombre_materia, horas_materia, ciclo_mat_carrera, id_materia\n"
@@ -32,7 +32,7 @@ public class DBMateriasCarrera extends MateriasCarrera {
 
             while (rs.next()) {
 
-                MateriasCarrera mat = new MateriasCarrera();
+                Materias mat = new Materias();
 
                 mat.setCiclo(rs.getInt("ciclo_mat_carrera"));
                 mat.setHoras(rs.getInt("horas_materia"));
@@ -50,8 +50,8 @@ public class DBMateriasCarrera extends MateriasCarrera {
 
     }
 
-    public ArrayList<MateriasCarrera> consultarMateriasDocente(int idCarrera, String cedula) {
-        ArrayList<MateriasCarrera> materias = new ArrayList();
+    public ArrayList<Materias> consultarMateriasDocente(int idCarrera, String cedula) {
+        ArrayList<Materias> materias = new ArrayList();
 
         try {
             String sql = "SELECT nombre_materia, horas_materia, ciclo_mat_carrera, id_materia\n"
@@ -67,7 +67,7 @@ public class DBMateriasCarrera extends MateriasCarrera {
 
             while (rs.next()) {
 
-                MateriasCarrera mat = new MateriasCarrera();
+                Materias mat = new Materias();
 
                 mat.setCiclo(rs.getInt("ciclo_mat_carrera"));
                 mat.setHoras(rs.getInt("horas_materia"));

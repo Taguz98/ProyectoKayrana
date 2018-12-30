@@ -11,7 +11,7 @@ import java.time.LocalDate;
  *
  * @author Usuario
  */
-public class PeriodoLectivoCarrera {
+public class PeriodoLectivos {
     
     private int id; 
     private String carrera; 
@@ -21,7 +21,7 @@ public class PeriodoLectivoCarrera {
     private int numCiclos; 
     private int idCarrera; 
     
-    public PeriodoLectivoCarrera(){
+    public PeriodoLectivos(){
         
     }
 

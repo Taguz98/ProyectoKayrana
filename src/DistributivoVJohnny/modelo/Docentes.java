@@ -9,12 +9,12 @@ package DistributivoVJohnny.modelo;
  *
  * @author Usuario
  */
-public class MateriasDocente {
+public class Docentes {
     
     private String cedula; 
     private String nombre; 
     
-    public MateriasDocente(){
+    public Docentes(){
         
     } 
 

@@ -13,12 +13,12 @@ import java.util.ArrayList;
  *
  * @author Usuario
  */
-public class DBMateriasDocente extends MateriasDocente {
+public class DBDocentes extends Docentes {
 
     BDConect bd = new BDConect();
 
-    public ArrayList<MateriasDocente> consultarMateriasDocente(int idMateria) {
-        ArrayList<MateriasDocente> materias = new ArrayList();
+    public ArrayList<Docentes> consultarMateriasDocente(int idMateria) {
+        ArrayList<Docentes> materias = new ArrayList();
 
         try {
             String sql = "SELECT cedula_docente, nombre_donce \n"
@@ -28,7 +28,7 @@ public class DBMateriasDocente extends MateriasDocente {
             ResultSet rs = bd.sql(sql);
 
             while (rs.next()) {
-                MateriasDocente mat = new MateriasDocente();
+                Docentes mat = new Docentes();
 
                 mat.setCedula(rs.getString("cedula_docente"));
                 mat.setNombre(rs.getString("nombre_donce"));
@@ -42,8 +42,8 @@ public class DBMateriasDocente extends MateriasDocente {
         }
     }
 
-    public ArrayList<MateriasDocente> consultarDocenteCarrera(int idCarrera) {
-        ArrayList<MateriasDocente> docente = new ArrayList();
+    public ArrayList<Docentes> consultarDocenteCarrera(int idCarrera) {
+        ArrayList<Docentes> docente = new ArrayList();
 
         try {
             String sql = "SELECT cedula_docente, nombre_donce \n"
@@ -53,7 +53,7 @@ public class DBMateriasDocente extends MateriasDocente {
             ResultSet rs = bd.sql(sql);
 
             while (rs.next()) {
-                MateriasDocente mat = new MateriasDocente();
+                Docentes mat = new Docentes();
 
                 mat.setCedula(rs.getString("cedula_docente"));
                 mat.setNombre(rs.getString("nombre_donce"));

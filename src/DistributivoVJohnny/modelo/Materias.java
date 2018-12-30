@@ -9,13 +9,14 @@ package DistributivoVJohnny.modelo;
  *
  * @author Usuario
  */
-public class ParalelosCarrera {
+public class Materias {
     
-    private int id; 
+    private int id;
     private String nombre; 
+    private int horas; 
     private int ciclo; 
     
-    public ParalelosCarrera(){ 
+    public Materias(){ 
         
     }
 
@@ -35,6 +36,14 @@ public class ParalelosCarrera {
         this.nombre = nombre;
     }
 
+    public int getHoras() {
+        return horas;
+    }
+
+    public void setHoras(int horas) {
+        this.horas = horas;
+    }
+
     public int getCiclo() {
         return ciclo;
     }
@@ -42,6 +51,7 @@ public class ParalelosCarrera {
     public void setCiclo(int ciclo) {
         this.ciclo = ciclo;
     }
-
+    
     
 }
+

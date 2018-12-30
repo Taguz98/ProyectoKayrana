@@ -14,14 +14,14 @@ import java.util.ArrayList;
  *
  * @author Usuario
  */
-public class DBPeriodoLectivoCarrera extends PeriodoLectivoCarrera {
+public class DBPeriodoLectivos extends PeriodoLectivos {
 
     //Nos conectamos a la base de datos  
     BDConect bd = new BDConect();
 
-    public ArrayList<PeriodoLectivoCarrera> cargarPeriodoLectivoCarrera() {
+    public ArrayList<PeriodoLectivos> cargarPeriodoLectivoCarrera() {
         //El array que guardara todos los resultados que me devuelva la consulta 
-        ArrayList<PeriodoLectivoCarrera> periodos = new ArrayList();
+        ArrayList<PeriodoLectivos> periodos = new ArrayList();
 
         try {
             String sql = " SELECT id_per_lect, fecha_ini_per_lect, \n"
@@ -38,7 +38,7 @@ public class DBPeriodoLectivoCarrera extends PeriodoLectivoCarrera {
             while (rs.next()) {
                 //System.out.println("Entramos a llenar el array.");
 
-                PeriodoLectivoCarrera per = new PeriodoLectivoCarrera();
+                PeriodoLectivos per = new PeriodoLectivos();
 
                 per.setAnio(rs.getString("anio_per_lect"));
                 per.setCarrera(rs.getString("nombre_carrera"));

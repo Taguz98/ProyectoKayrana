@@ -9,12 +9,13 @@ package DistributivoVJohnny.modelo;
  *
  * @author Usuario
  */
-public class ParalelosJornada {
+public class Paralelos {
     
     private int id; 
-    private String descripcion; 
+    private String nombre; 
+    private int ciclo; 
     
-    public ParalelosJornada(){ 
+    public Paralelos(){ 
         
     }
 
@@ -26,12 +27,21 @@ public class ParalelosJornada {
         this.id = id;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
+
+    public int getCiclo() {
+        return ciclo;
+    }
+
+    public void setCiclo(int ciclo) {
+        this.ciclo = ciclo;
+    }
+
     
 }

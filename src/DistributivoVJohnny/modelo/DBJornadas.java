@@ -13,13 +13,13 @@ import java.util.ArrayList;
  *
  * @author Usuario
  */
-public class DBParalelosJornada extends ParalelosJornada {
+public class DBJornadas extends Jornadas {
 
     //Nos conectamos a base de datos  
     BDConect bd = new BDConect();
 
-    public ArrayList<ParalelosJornada> cargaParalelosJornada(int idParalelos) {
-        ArrayList<ParalelosJornada> jornadas = new ArrayList();
+    public ArrayList<Jornadas> cargaParalelosJornada(int idParalelos) {
+        ArrayList<Jornadas> jornadas = new ArrayList();
         try {
             String sql = "SELECT id_deta_jornada, descripcion_jornada \n"
                     + "FROM public.\"Paralelos_Jornada\", public.\"Detalle_Jornada\" \n"
@@ -28,7 +28,7 @@ public class DBParalelosJornada extends ParalelosJornada {
             ResultSet rs = bd.sql(sql);
 
             while (rs.next()) {
-                ParalelosJornada jd = new ParalelosJornada();
+                Jornadas jd = new Jornadas();
 
                 jd.setDescripcion(rs.getString("descripcion_jornada"));
                 jd.setId(rs.getInt("id_deta_jornada"));
