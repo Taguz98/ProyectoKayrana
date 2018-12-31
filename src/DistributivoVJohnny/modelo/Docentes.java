@@ -5,6 +5,8 @@
  */
 package DistributivoVJohnny.modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Usuario
@@ -13,6 +15,7 @@ public class Docentes {
     
     private String cedula; 
     private String nombre; 
+    private ArrayList<Materias> materiasPref;
     
     public Docentes(){
         
@@ -32,6 +35,14 @@ public class Docentes {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public ArrayList<Materias> getMateriasPref() {
+        return materiasPref;
+    }
+
+    public void setMateriasPref(ArrayList<Materias> materiasPref) {
+        this.materiasPref = materiasPref;
     }
     
 }

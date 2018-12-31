@@ -5,6 +5,7 @@
  */
 package DistributivoVJohnny.vista;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -69,6 +70,22 @@ public class PnlClasificar extends javax.swing.JPanel {
     public void setLblNumMaterias(JLabel lblNumMaterias) {
         this.lblNumMaterias = lblNumMaterias;
     }
+
+    public JLabel getLblHorasMaterias() {
+        return lblHorasMaterias;
+    }
+
+    public void setLblHorasMaterias(JLabel lblHorasMaterias) {
+        this.lblHorasMaterias = lblHorasMaterias;
+    }
+
+    public JButton getBtnOrganizarHorario() {
+        return btnOrganizarHorario;
+    }
+
+    public void setBtnOrganizarHorario(JButton btnOrganizarHorario) {
+        this.btnOrganizarHorario = btnOrganizarHorario;
+    }
     
     
 
@@ -100,7 +117,10 @@ public class PnlClasificar extends javax.swing.JPanel {
         lblNumMaterias = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         lblNumDocentes = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        lblHorasMaterias = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        btnOrganizarHorario = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -206,28 +226,42 @@ public class PnlClasificar extends javax.swing.JPanel {
         lblNumDocentes.setText("0");
         add(lblNumDocentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 40, 30));
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel9.setText("<html> Elija un paralelo:</html>");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 130, 30));
+        lblHorasMaterias.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lblHorasMaterias.setText("0");
+        add(lblHorasMaterias, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 160, 30, 30));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel11.setText("<html> Elija un paralelo:</html>");
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 130, 30));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel12.setText("Horas materias:");
+        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 160, 120, 30));
+
+        btnOrganizarHorario.setText("Organizar Horario");
+        add(btnOrganizarHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 170, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnOrganizarHorario;
     private javax.swing.JComboBox<String> cbCiclo;
     private javax.swing.JComboBox<String> cbJornada;
     private javax.swing.JComboBox<String> cbParalelo;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblHorasClase;
+    private javax.swing.JLabel lblHorasMaterias;
     private javax.swing.JLabel lblNumDocentes;
     private javax.swing.JLabel lblNumMaterias;
     private javax.swing.JTable tblHorario;

@@ -82,7 +82,40 @@ public class DBMaterias extends Materias {
             System.out.println("Se produjo un error al consultar materias. " + e.getMessage());
             return null;
         }
+    }
+    
+    //Consultamos las materias de un docente en un ciclo determinado
+    public ArrayList<Materias> consultarMateriasDocenteCiclo(int idCarrera, String cedula, int ciclo) {
+        ArrayList<Materias> materias = new ArrayList();
 
+        try {
+            String sql = "SELECT nombre_materia, horas_materia, ciclo_mat_carrera, id_materia\n"
+                    + "FROM public.\"Materias_Carrera\", public.\"Materias_Ciclo\", public.\"Materias\",\n"
+                    + "public.\"Materias_Preferentes\"\n"
+                    + "WHERE materia_elim = false AND mat_carrera_elim = false\n"
+                    + "AND fk_carrera = "+idCarrera+" AND fk_mat_carrera = id_mat_carrera\n"
+                    + "AND id_materia = fk_materia AND fk_docente = '"+cedula+" '\n"
+                    + "AND fk_materia = fk_materias AND ciclo_mat_carrera = "+ciclo+";";
+
+            ResultSet rs = bd.sql(sql);
+
+            while (rs.next()) {
+
+                Materias mat = new Materias();
+
+                mat.setCiclo(rs.getInt("ciclo_mat_carrera"));
+                mat.setHoras(rs.getInt("horas_materia"));
+                mat.setId(rs.getInt("id_materia"));
+                mat.setNombre(rs.getString("nombre_materia"));
+
+                materias.add(mat);
+            }
+            //bd.st.close();
+            return materias;
+        } catch (SQLException e) {
+            System.out.println("Se produjo un error al consultar materias. " + e.getMessage());
+            return null;
+        }
     }
 
 }

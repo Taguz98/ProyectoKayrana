@@ -719,9 +719,7 @@ public class DistributivoVtn extends javax.swing.JFrame {
         Similitudes.cambioPanel(panelCuerpo, panelMasInfo);
     }//GEN-LAST:event_btnMasInfoMouseClicked
 
-    ArrayList<ArrayList<String>> docentesMatFilt = new ArrayList();
-
-    ; 
+    ArrayList<ArrayList<String>> docentesMatFilt = new ArrayList(); 
     
     private void btnClasificarMatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClasificarMatMouseClicked
 
