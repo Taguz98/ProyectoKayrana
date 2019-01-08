@@ -7,7 +7,6 @@ package DistributivoVJohnny.controlador;
 
 import DistributivoVJohnny.modelo.Clase;
 import DistributivoVJohnny.modelo.ClaseDia;
-import DistributivoVJohnny.modelo.Clases;
 import DistributivoVJohnny.modelo.DBMaterias;
 import DistributivoVJohnny.modelo.DBDocentes;
 import DistributivoVJohnny.modelo.DBParalelos;
@@ -21,6 +20,7 @@ import DistributivoVJohnny.modelo.PeriodoLectivos;
 import DistributivoVJohnny.vista.Distributivo;
 import DistributivoVJohnny.vista.PnlClasificar;
 import DistributivoVJohnny.vista.PnlDocentes;
+import DistributivoVJohnny.vista.PnlInformacion;
 import DistributivoVJohnny.vista.PnlMaterias;
 import DistributivoVJohnny.vista.PnlParalelos;
 import Interfaz.Administrador.Similitudes;
@@ -58,6 +58,7 @@ public class CTRDistributivo {
     private final PnlDocentes pnlDocen = new PnlDocentes();
     private final PnlMaterias pnlMat = new PnlMaterias();
     private final PnlParalelos pnlPara = new PnlParalelos();
+    private final PnlInformacion pnlInfo = new PnlInformacion();
 
     public CTRDistributivo(Distributivo distri) {
         this.distri = distri;
@@ -71,6 +72,7 @@ public class CTRDistributivo {
         distri.getBtnDocentes().addActionListener(e -> docentes());
         distri.getBtnMaterias().addActionListener(e -> materias());
         distri.getBtnParalelos().addActionListener(e -> paralelos());
+        distri.getBtnInformacion().addActionListener(e -> informacion());
 
         //Llamamos a la funcion que da un formato al titulo de las tablas  
         Similitudes.tituloTbls(pnlClas.getTblHorario());
@@ -82,6 +84,8 @@ public class CTRDistributivo {
         Similitudes.tituloTbls(pnlMat.getTblMaterias());
         Similitudes.tituloTbls(pnlPara.getTblJornadas());
         Similitudes.tituloTbls(pnlPara.getTblParalelos());
+        Similitudes.tituloTbls(pnlInfo.getTblDocentesSelecionados());
+        Similitudes.tituloTbls(pnlInfo.getTblHorarioOrdenado());
 
         //Asignamos una accion al btn salir  
         distri.getBtnSalir().addActionListener(e -> salir());
@@ -110,6 +114,8 @@ public class CTRDistributivo {
 
         //Le damos una accion a organizar horario  
         pnlClas.getBtnOrganizarHorario().addActionListener(e -> organizarHorario());
+        //Le damos una accion a ordenar horario  
+        pnlClas.getBtnOrdenarHorario().addActionListener(e -> ordenarHorario());
     }
 
     public void clasificar() {
@@ -496,97 +502,44 @@ public class CTRDistributivo {
 
     }
 
+    //Aqui guardamos  todas las materias por dia 
+    ArrayList<Clase> clasesLunes;
+    ArrayList<Clase> clasesMartes;
+    ArrayList<Clase> clasesMiercoles;
+    ArrayList<Clase> clasesJueves;
+    ArrayList<Clase> clasesViernes;
+
+    ArrayList<ClaseDia> clasesDia;
+
     //Aqui organizaremos el horario de nuestra materia
     public void organizarHorario() {
+        clasesLunes = new ArrayList<>();
+        clasesMartes = new ArrayList<>();
+        clasesMiercoles = new ArrayList<>();
+        clasesJueves = new ArrayList<>();
+        clasesViernes = new ArrayList<>();
+
+        clasesDia = new ArrayList<>();
+
         int posPar = pnlClas.getCbParalelo().getSelectedIndex();
         //Si la posicion del paralelos es mayor que 0 significa que se escogio un curso 
         if (posPar > 0) {
             //Numero de materias de esta carrera en este ciclo  
-            int cantMat = materiasFiltradas.size();
-
-            //Crearemos las clases  
-            ArrayList<Clases> clases = new ArrayList<>();
-            int horasClase[];
-            int sumHorasClase;
-            for (Materias mt : materiasFiltradas) {
-                Clases clase = new Clases();
-                clase.setMateria(mt);
-
-                sumHorasClase = 0;
-
-                if (mt.getHoras() <= 4) {
-                    clase.setNumDiasClase(2);
-                    horasClase = new int[clase.getNumDiasClase()];
-
-                    for (int i = 0; i < horasClase.length; i++) {
-
-                        if (i == horasClase.length - 1) {
-                            System.out.println("Estamos en la ultima posicion de la hora");
-                            horasClase[i] = mt.getHoras() - sumHorasClase;
-                        } else {
-                            horasClase[i] = Math.round(mt.getHoras() / clase.getNumDiasClase());
-                            sumHorasClase = sumHorasClase + horasClase[i];
-                        }
-                    }
-
-                    clase.setHorasClaseDia(horasClase);
-                } else {
-                    clase.setNumDiasClase(3);
-                    horasClase = new int[clase.getNumDiasClase()];
-
-                    for (int i = 0; i < horasClase.length; i++) {
-
-                        if (i == horasClase.length - 1) {
-                            //System.out.println("Estamos en la ultima posicion de la hora");
-                            horasClase[i] = mt.getHoras() - sumHorasClase;
-                        } else {
-                            horasClase[i] = Math.round(mt.getHoras() / clase.getNumDiasClase());
-                            sumHorasClase = sumHorasClase + horasClase[i];
-                        }
-                    }
-
-                    clase.setHorasClaseDia(horasClase);
-                }
-                clases.add(clase);
-            }
-            /*
-            for (int i = 0; i < clases.size(); i++) {
-                System.out.println("-----------");
-                System.out.println("Nombre materia: " + clases.get(i).getMateria().getNombre());
-                System.out.println("Ciclo materia: " + clases.get(i).getMateria().getCiclo());
-                System.out.println("Num de dias: " + clases.get(i).getNumDiasClase() + "");
-                System.out.println("Horas semana: " + clases.get(i).getMateria().getHoras());
-                for (int j = 0; j < clases.get(i).getHorasClaseDia().length; j++) {
-                    System.out.print(clases.get(i).getHorasClaseDia()[j] + " | ");
-                }
-                System.out.println("\n-----------");
-            }*/
-
-            ArrayList<ClaseDia> clasesDia = new ArrayList<>();
 
             //Todas las clases que tendra en una semana  
             ArrayList<Clase> clasesSemana = new ArrayList<>();
-            
-            /*
-            for (Clases cl : clases) {
-                for (int i = 0; i < cl.getHorasClaseDia().length; i++) {
+            System.out.println("\n#################################");
+            for (Materias mt : materiasFiltradas) {
+                mt.setHorasMax();
+                System.out.println("Horas totales: " + mt.getHoras() + " Hora mayor: " + mt.getHorasMax() + "  |  " + mt.getNombre());
+                for (int i = 0; i < mt.getHoras(); i++) {
                     Clase c = new Clase();
-                    c.setMateria(cl.getMateria());
-                    c.setHoras(cl.getHorasClaseDia()[i]);
+                    c.setMateria(mt);
+                    c.setHoras(1);
                     clasesSemana.add(c);
                 }
-            }*/
-            
-            for(Materias mt: materiasFiltradas){
-                for (int i = 0; i < mt.getHoras(); i++) {
-                    Clase c = new Clase(); 
-                    c.setMateria(mt); 
-                    c.setHoras(1);
-                    clasesSemana.add(c); 
-                }
             }
-            
-            System.out.println("Numero de clases en la semanita: "+clasesSemana.size());
+            System.out.println("#################################");
 
             int posClase;
 
@@ -596,20 +549,307 @@ public class CTRDistributivo {
                     posClase = (int) (Math.random() * clasesSemana.size());
 
                     mdTblHorarioDatos.setValueAt(clasesSemana.get(posClase).getMateria().getNombre(), j, i);
-                    
+
+                    switch (i) {
+                        case 1:
+                            clasesLunes.add(clasesSemana.get(posClase));
+                            break;
+                        case 2:
+                            clasesMartes.add(clasesSemana.get(posClase));
+                            break;
+                        case 3:
+                            clasesMiercoles.add(clasesSemana.get(posClase));
+                            break;
+                        case 4:
+                            clasesJueves.add(clasesSemana.get(posClase));
+                            break;
+                        case 5:
+                            clasesViernes.add(clasesSemana.get(posClase));
+                            break;
+                        default:
+                            System.out.println("No se encontro posicion para esta materia");
+                            System.out.println("Materia: " + clasesSemana.get(posClase).getMateria().getNombre());
+                            break;
+                    }
+
                     clasesSemana.remove(posClase);
+
                 }
             }
 
-            System.out.println("Esta cantidad de clases tendra a la semana: " + clasesSemana.size());
+        }
+    }
 
-            int horasCla = 0;
-            for (Clase c : clasesSemana) {
-                horasCla = horasCla + c.getHoras();
+    //Ordenar la tabla 
+    private void ordenarHorario() {
+
+        System.out.println("----------------------------------------------");
+        System.out.println("Ordenamos el dia lunes:");
+
+        Clase c;
+        int fila = 0;
+
+        do {
+            if (clasesLunes.size() > 0) {
+                System.out.println(clasesLunes.get(0).getMateria().getNombre());
+                c = clasesLunes.get(0);
+                clasesLunes.remove(0);
+
+                ClaseDia clDia = new ClaseDia();
+                clDia.setDia(1);
+                clDia.setMateria(c.getMateria());
+                clDia.setNumHoras(c.getHoras());
+
+                mdTblHorarioDatos.setValueAt(c.getMateria().getNombre(), fila, 1);
+                fila++;
+
+                for (int i = 0; i < clasesLunes.size(); i++) {
+                    if (clasesLunes.get(i).getMateria().equals(c.getMateria())) {
+                        System.out.println(clasesLunes.get(i).getMateria().getNombre());
+
+                        mdTblHorarioDatos.setValueAt(clasesLunes.get(i).getMateria().getNombre(), fila, 1);
+                        fila++;
+
+                        clasesLunes.remove(i);
+                        clDia.setNumHoras(clDia.getNumHoras() + 1);
+                        /*
+                        if (clDia.getNumHoras() > clDia.getMateria().getHorasMax()) {
+                            organizarHorario(); 
+                        }*/
+
+                    }
+                }
+
+                clasesDia.add(clDia);
             }
-            System.out.println("Esta es la cantidad de horas que tendra a la semana " + horasCla);
+
+        } while (clasesLunes.size() > 0);
+
+        fila = 0;
+
+        System.out.println("");
+        System.out.println("Ordenamos martes: ");
+        do {
+            if (clasesMartes.size() > 0) {
+                System.out.println(clasesMartes.get(0).getMateria().getNombre());
+                c = clasesMartes.get(0);
+                clasesMartes.remove(0);
+
+                ClaseDia clDia = new ClaseDia();
+                clDia.setDia(2);
+                clDia.setMateria(c.getMateria());
+                clDia.setNumHoras(c.getHoras());
+
+                mdTblHorarioDatos.setValueAt(c.getMateria().getNombre(), fila, 2);
+                fila++;
+
+                for (int i = 0; i < clasesMartes.size(); i++) {
+                    if (clasesMartes.get(i).getMateria().equals(c.getMateria())) {
+                        System.out.println(clasesMartes.get(i).getMateria().getNombre());
+
+                        mdTblHorarioDatos.setValueAt(clasesMartes.get(i).getMateria().getNombre(), fila, 2);
+                        fila++;
+
+                        clasesMartes.remove(i);
+                        clDia.setNumHoras(clDia.getNumHoras() + 1);
+                        /*
+                        if (clDia.getNumHoras() > clDia.getMateria().getHorasMax()) {
+                            organizarHorario();
+                        }*/
+                    }
+                }
+
+                clasesDia.add(clDia);
+            }
+
+        } while (clasesMartes.size() > 0);
+
+        System.out.println("");
+        System.out.println("Ordenamos miercoles:");
+
+        fila = 0;
+
+        do {
+            if (clasesMiercoles.size() > 0) {
+                System.out.println(clasesMiercoles.get(0).getMateria().getNombre());
+                c = clasesMiercoles.get(0);
+                clasesMiercoles.remove(0);
+
+                ClaseDia clDia = new ClaseDia();
+                clDia.setDia(3);
+                clDia.setMateria(c.getMateria());
+                clDia.setNumHoras(c.getHoras());
+
+                mdTblHorarioDatos.setValueAt(c.getMateria().getNombre(), fila, 3);
+                fila++;
+
+                for (int i = 0; i < clasesMiercoles.size(); i++) {
+                    if (clasesMiercoles.get(i).getMateria().equals(c.getMateria())) {
+                        System.out.println(clasesMiercoles.get(i).getMateria().getNombre());
+
+                        mdTblHorarioDatos.setValueAt(clasesMiercoles.get(i).getMateria().getNombre(), fila, 3);
+                        fila++;
+
+                        clasesMiercoles.remove(i);
+
+                        clDia.setNumHoras(clDia.getNumHoras() + 1);
+                        /*
+                        if (clDia.getNumHoras() > clDia.getMateria().getHorasMax()) {
+                            organizarHorario();
+                        }*/
+                    }
+                }
+
+                clasesDia.add(clDia);
+            }
+
+        } while (clasesMiercoles.size() > 0);
+
+        System.out.println("");
+        System.out.println("Ordenamos jueves:");
+        fila = 0;
+
+        do {
+            if (clasesJueves.size() > 0) {
+                System.out.println(clasesJueves.get(0).getMateria().getNombre());
+                c = clasesJueves.get(0);
+                clasesJueves.remove(0);
+
+                ClaseDia clDia = new ClaseDia();
+                clDia.setDia(4);
+                clDia.setMateria(c.getMateria());
+                clDia.setNumHoras(c.getHoras());
+
+                mdTblHorarioDatos.setValueAt(c.getMateria().getNombre(), fila, 4);
+                fila++;
+
+                for (int i = 0; i < clasesJueves.size(); i++) {
+                    if (clasesJueves.get(i).getMateria().equals(c.getMateria())) {
+                        System.out.println(clasesJueves.get(i).getMateria().getNombre());
+
+                        mdTblHorarioDatos.setValueAt(clasesJueves.get(i).getMateria().getNombre(), fila, 4);
+                        fila++;
+
+                        clasesJueves.remove(i);
+
+                        clDia.setNumHoras(clDia.getNumHoras() + 1);
+                        /*
+                        if (clDia.getNumHoras() > clDia.getMateria().getHorasMax()) {
+                            organizarHorario();
+                        }*/
+                    }
+                }
+
+                clasesDia.add(clDia);
+            }
+
+        } while (clasesJueves.size() > 0);
+
+        fila = 0;
+        System.out.println("");
+        System.out.println("Ordenamos Viernes:");
+
+        do {
+            if (clasesViernes.size() > 0) {
+                System.out.println(clasesViernes.get(0).getMateria().getNombre());
+                c = clasesViernes.get(0);
+                clasesViernes.remove(0);
+
+                ClaseDia clDia = new ClaseDia();
+                clDia.setDia(5);
+                clDia.setMateria(c.getMateria());
+                clDia.setNumHoras(c.getHoras());
+
+                mdTblHorarioDatos.setValueAt(c.getMateria().getNombre(), fila, 5);
+                fila++;
+
+                for (int i = 0; i < clasesViernes.size(); i++) {
+                    if (clasesViernes.get(i).getMateria().equals(c.getMateria())) {
+                        System.out.println(clasesViernes.get(i).getMateria().getNombre());
+
+                        mdTblHorarioDatos.setValueAt(clasesViernes.get(i).getMateria().getNombre(), fila, 5);
+                        fila++;
+
+                        clasesViernes.remove(i);
+
+                        clDia.setNumHoras(clDia.getNumHoras() + 1);
+                        /*
+                        if (clDia.getNumHoras() > clDia.getMateria().getHorasMax()) {
+                            organizarHorario();
+                        }*/
+                    }
+                }
+
+                clasesDia.add(clDia);
+            }
+
+        } while (clasesViernes.size() > 0);
+
+        System.out.println("");
+        System.out.println("Ahora veremos cuantas clases se crearon:");
+        System.out.println(clasesDia.size());
+        System.out.println("Ahora veremos cuantas horas se cumplen");
+        System.out.println("------------------");
+        System.out.println("------------------");
+        int horasCumplidas = 0;
+        for (ClaseDia clDia : clasesDia) {
+            horasCumplidas = horasCumplidas + clDia.getNumHoras();
+            if (clDia.getDia() == 1) {
+                System.out.println("Materia: " + clDia.getMateria().getNombre() + " ");
+                System.out.println("Horas: " + clDia.getNumHoras());
+                System.out.println("Dia: " + clDia.getDia());
+            }
+        }
+        System.out.println("------------------");
+        System.out.println(horasCumplidas);
+
+    }
+
+    public void informacion() {
+        Similitudes.cambioPanel(distri.getPnlPrincipal(), pnlInfo);
+
+        //Seteamos la tabla  
+        String titulo[] = {"Cedula", "Docente", "# Materias"};
+        String datos[][] = {};
+        DefaultTableModel mdTblDocenFil = new DefaultTableModel(datos, titulo);
+        if (distri.getCbPeriodoLectivo().getSelectedIndex() > 0 && docentesFiltrados != null) {
+
+            pnlInfo.getTblDocentesSelecionados().setModel(mdTblDocenFil);
+
+            for (Docentes dc : docentesFiltrados) {
+                Object valores[] = {dc.getCedula(),
+                    dc.getNombre(), dc.getMateriasPref().size()};
+                mdTblDocenFil.addRow(valores);
+            }
+            pnlInfo.getTblHorarioOrdenado().setModel(mdTblHorarioDatos);
+
+            ArrayList<Docentes> docenGanador = new ArrayList<>();
+
+            int numMat = materiasFiltradas.size();
+
+            int posDoc;
+
+            do {
+                posDoc = (int) (Math.random() * docentesFiltrados.size());
+                if (!docenGanador.contains(docentesFiltrados.get(posDoc))) {
+                    for (Materias mt : docentesFiltrados.get(posDoc).getMateriasPref()) {
+                        for(Docentes dc: docenGanador){ 
+                            for(Materias m: dc.getMateriasEleg()){
+                                if(!mt.getNombre().equals(m.getNombre())){
+                                    System.out.println("Se puede poner esta materia YEII!!!");
+                                    docentesFiltrados.get(posDoc).getMateriasEleg().add(m); 
+                                    docenGanador.add(docentesFiltrados.get(posDoc));
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
+
+            } while (docenGanador.size() <= numMat);
 
         }
+
     }
 
 }

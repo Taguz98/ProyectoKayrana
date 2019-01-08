@@ -16,9 +16,10 @@ public class Docentes {
     private String cedula; 
     private String nombre; 
     private ArrayList<Materias> materiasPref;
+    private ArrayList<Materias> materiasEleg; 
     
     public Docentes(){
-        
+        this.materiasEleg = new ArrayList<>();
     } 
 
     public String getCedula() {
@@ -44,5 +45,15 @@ public class Docentes {
     public void setMateriasPref(ArrayList<Materias> materiasPref) {
         this.materiasPref = materiasPref;
     }
+
+    public ArrayList<Materias> getMateriasEleg() {
+        return materiasEleg;
+    }
+
+    public void setMateriasEleg(ArrayList<Materias> materiasEleg) {
+        this.materiasEleg = materiasEleg;
+    }
+    
+    
     
 }

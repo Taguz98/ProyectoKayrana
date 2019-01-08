@@ -54,6 +54,10 @@ public class Distributivo extends javax.swing.JFrame {
     public JPanel getPnlPrincipal() {
         return pnlPrincipal;
     }
+
+    public JButton getBtnInformacion() {
+        return btnInformacion;
+    }
     
     
 
@@ -76,6 +80,7 @@ public class Distributivo extends javax.swing.JFrame {
         btnParalelos = new javax.swing.JButton();
         btnDocentes = new javax.swing.JButton();
         btnMaterias = new javax.swing.JButton();
+        btnInformacion = new javax.swing.JButton();
         pnlPrincipal = new javax.swing.JPanel();
         pnlInicio = new javax.swing.JPanel();
 
@@ -133,6 +138,9 @@ public class Distributivo extends javax.swing.JFrame {
 
         btnMaterias.setText("Materias");
         pnlMenu.add(btnMaterias, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 80, 30));
+
+        btnInformacion.setText("Informacion");
+        pnlMenu.add(btnInformacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 0, 90, 30));
 
         getContentPane().add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 700, 30));
 
@@ -198,6 +206,7 @@ public class Distributivo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClasificar;
     private javax.swing.JButton btnDocentes;
+    private javax.swing.JButton btnInformacion;
     private javax.swing.JButton btnMaterias;
     private javax.swing.JButton btnParalelos;
     private javax.swing.JButton btnSalir;

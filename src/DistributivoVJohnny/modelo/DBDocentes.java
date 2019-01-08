@@ -72,7 +72,7 @@ public class DBDocentes extends Docentes {
     
     //Aqui consultamos los docentes de una carrera en un ciclo determinado 
     public ArrayList<Docentes> consultarDocenteCarreraCiclo(int idCarrera, int ciclo) {
-        ArrayList<Docentes> docente = new ArrayList();
+        ArrayList<Docentes> docentes = new ArrayList();
 
         try {
             String sql = "SELECT cedula_docente, nombre_donce\n"
@@ -94,11 +94,12 @@ public class DBDocentes extends Docentes {
                 dc.setNombre(rs.getString("nombre_donce"));
                 //Consultamos todas las materias preferentes de un docente  
                 DBMaterias mt = new DBMaterias();
-                dc.setMateriasPref(mt.consultarMateriasDocenteCiclo(idCarrera, dc.getCedula(), ciclo));
-
-                docente.add(dc);
+                //dc.setMateriasPref(mt.consultarMateriasDocenteCiclo(idCarrera, dc.getCedula(), ciclo));
+                dc.setMateriasPref(mt.consultarMateriasDocente(idCarrera, dc.getCedula()));
+                
+                docentes.add(dc);
             }
-            return docente;
+            return docentes;
         } catch (SQLException | NullPointerException e) {
             System.out.println("No se pudo consultar docentes de una carrera." + e.getMessage());
             return null;

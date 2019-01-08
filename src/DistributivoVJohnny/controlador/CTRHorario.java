@@ -5,6 +5,7 @@
  */
 package DistributivoVJohnny.controlador;
 
+import DistributivoVJohnny.modelo.ClaseDia;
 import DistributivoVJohnny.modelo.Docentes;
 import DistributivoVJohnny.modelo.Materias;
 import DistributivoVJohnny.modelo.Paralelos;
@@ -16,15 +17,11 @@ import java.util.ArrayList;
  */
 public class CTRHorario {
     
-    private final ArrayList<Paralelos> paralelos; 
-    private final ArrayList<Materias> materias; 
-    private final ArrayList<Docentes> docentes;
+    private ArrayList<Paralelos> paralelos; 
+    private ArrayList<Materias> materias; 
+    private ArrayList<Docentes> docentes;
+    private ArrayList<ClaseDia> clasesSemana;  
 
-    public CTRHorario(ArrayList<Paralelos> paralelos, ArrayList<Materias> materias, ArrayList<Docentes> docentes) {
-        this.paralelos = paralelos;
-        this.materias = materias;
-        this.docentes = docentes;
-    }
     
     
     

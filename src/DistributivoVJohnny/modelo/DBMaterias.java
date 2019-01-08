@@ -107,13 +107,16 @@ public class DBMaterias extends Materias {
                 mat.setHoras(rs.getInt("horas_materia"));
                 mat.setId(rs.getInt("id_materia"));
                 mat.setNombre(rs.getString("nombre_materia"));
+                
+                System.out.println("Este docente consultamos: "+cedula);
+                System.out.println(mat.getNombre()+" "+mat.getCiclo());
 
                 materias.add(mat);
             }
             //bd.st.close();
             return materias;
         } catch (SQLException e) {
-            System.out.println("Se produjo un error al consultar materias. " + e.getMessage());
+            System.out.println("Se produjo un error al consultar materias de un docente en un ciclo. " + e.getMessage());
             return null;
         }
     }

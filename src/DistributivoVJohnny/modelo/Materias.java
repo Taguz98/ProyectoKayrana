@@ -10,14 +10,15 @@ package DistributivoVJohnny.modelo;
  * @author Usuario
  */
 public class Materias {
-    
+
     private int id;
-    private String nombre; 
-    private int horas; 
-    private int ciclo; 
-    
-    public Materias(){ 
-        
+    private String nombre;
+    private int horas;
+    private int ciclo;
+    private int horasMax;
+
+    public Materias() {
+
     }
 
     public int getId() {
@@ -51,7 +52,53 @@ public class Materias {
     public void setCiclo(int ciclo) {
         this.ciclo = ciclo;
     }
-    
-    
-}
 
+    public int getHorasMax() {
+        return horasMax;
+    }
+
+    public void setHorasMax() {
+        int horasClase[];
+        int sumHorasClase = 0;
+        int numDiaClase;
+        int horaMayor = 0;
+
+        if (getHoras() <= 4) {
+            numDiaClase = 2;
+            horasClase = new int[numDiaClase];
+
+            for (int i = 0; i < horasClase.length; i++) {
+
+                if (i == horasClase.length - 1) {
+                    horasClase[i] = getHoras() - sumHorasClase;
+                } else {
+                    horasClase[i] = Math.round(getHoras() / numDiaClase);
+                    sumHorasClase = sumHorasClase + horasClase[i];
+                }
+            }
+
+        } else {
+            numDiaClase = 3;
+            horasClase = new int[numDiaClase];
+
+            for (int i = 0; i < horasClase.length; i++) {
+
+                if (i == horasClase.length - 1) {
+                    horasClase[i] = getHoras() - sumHorasClase;
+                } else {
+                    horasClase[i] = Math.round(getHoras() / numDiaClase);
+                    sumHorasClase = sumHorasClase + horasClase[i];
+                }
+            }
+        }
+
+        for (int i = 0; i < horasClase.length; i++) {
+            if (horasClase[i] > horaMayor) {
+                horaMayor = horasClase[i];
+            }
+        }
+        
+        this.horasMax = horaMayor; 
+    }
+
+}

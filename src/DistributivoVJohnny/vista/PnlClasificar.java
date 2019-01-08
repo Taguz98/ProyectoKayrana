@@ -86,6 +86,14 @@ public class PnlClasificar extends javax.swing.JPanel {
     public void setBtnOrganizarHorario(JButton btnOrganizarHorario) {
         this.btnOrganizarHorario = btnOrganizarHorario;
     }
+
+    public JButton getBtnOrdenarHorario() {
+        return btnOrdenarHorario;
+    }
+
+    public void setBtnOrdenarHorario(JButton btnOrdenarHorario) {
+        this.btnOrdenarHorario = btnOrdenarHorario;
+    }
     
     
 
@@ -121,6 +129,7 @@ public class PnlClasificar extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         btnOrganizarHorario = new javax.swing.JButton();
+        btnOrdenarHorario = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -202,48 +211,52 @@ public class PnlClasificar extends javax.swing.JPanel {
         cbParalelo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         add(cbParalelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, 190, 30));
 
-        lblHorasClase.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lblHorasClase.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblHorasClase.setText("0");
-        add(lblHorasClase, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 40, 30));
+        add(lblHorasClase, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 30, 30));
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Horas clase:");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 90, 30));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 80, 30));
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("# materias:");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 90, 30));
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 80, 30));
 
-        lblNumMaterias.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lblNumMaterias.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNumMaterias.setText("0");
-        add(lblNumMaterias, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 40, 30));
+        add(lblNumMaterias, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 30, 30));
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("# docentes:");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, 90, 30));
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 80, 30));
 
-        lblNumDocentes.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lblNumDocentes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNumDocentes.setText("0");
-        add(lblNumDocentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 40, 30));
+        add(lblNumDocentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, 30, 30));
 
-        lblHorasMaterias.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lblHorasMaterias.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblHorasMaterias.setText("0");
-        add(lblHorasMaterias, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 160, 30, 30));
+        add(lblHorasMaterias, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 160, 20, 30));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel11.setText("<html> Elija un paralelo:</html>");
         add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 130, 30));
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Horas materias:");
-        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 160, 120, 30));
+        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 160, 110, 30));
 
         btnOrganizarHorario.setText("Organizar Horario");
         add(btnOrganizarHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 170, -1, -1));
+
+        btnOrdenarHorario.setText("Ordenar");
+        add(btnOrdenarHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(473, 170, 80, -1));
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnOrdenarHorario;
     private javax.swing.JButton btnOrganizarHorario;
     private javax.swing.JComboBox<String> cbCiclo;
     private javax.swing.JComboBox<String> cbJornada;
